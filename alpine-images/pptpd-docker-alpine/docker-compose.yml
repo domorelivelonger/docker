@@ -1,0 +1,12 @@
+version: '3'
+services:
+  pptpd:
+    container_name: pptpd1
+    restart: always
+    build: .
+    image: domorelivelonger/pptpd-docker-alpine
+    network_mode: host
+    environment:
+      - user=webxdta
+      - password=webxdata
+    privileged: true

@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+  proxy1:
+    restart: unless-stopped
+    image: domorelivelonger/3proxy-docker-alpine
+    build: ./
+    environment:
+      - VERSION=0.9.3
+      - SOCKS=1080
+      - HTTP=3128
+      - ADMIN=8080
+      - PROXY_LOGIN=webxdata
+      - PROXY_PASSWORD=webxdata
+

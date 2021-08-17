@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  dante:
+    build: .
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
+    container_name: dante
+    image: domorelivelonger/dante-docker-alpine
+    build: 
+      context: .
+    ports:
+      - "1081:1080"
+    restart: always
