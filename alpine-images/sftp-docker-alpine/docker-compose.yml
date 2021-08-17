@@ -1,0 +1,13 @@
+version: '3'
+services:
+  sftp:
+    container_name: sftp
+    restart: always
+    build: .
+    image: domorelivelonger/sftp-docker-alpine
+    volumes:
+      - ./sshd_config:/etc/ssh/sshd_config
+      - ./.ssh/:/home/webxdata/.ssh/
+    ports:
+      - "2222:22"
+
