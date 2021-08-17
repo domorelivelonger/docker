@@ -7,6 +7,6 @@ services:
     image: domorelivelonger/pptpd-docker-alpine
     network_mode: host
     environment:
-      - user=webxdta
+      - user=webxdata
       - password=webxdata
     privileged: true
