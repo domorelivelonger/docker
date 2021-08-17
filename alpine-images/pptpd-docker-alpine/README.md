@@ -1,25 +1,13 @@
 # pptpd-docker-alpine
 Minimal docker Alpine image with PPTPD VPN.
-
-### Usage
+## Example usage
 ```
-git clone https://github.com/domorelivelonger/pptpd-docker-alpine.git
-cd pptpd-docker-alpine
-docker-compose --compatibility up -d
+sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
+sysctl -p
+# change iptables rule for your inetrnet interface, eth0 - default, can be ens3, ens18, ens19 on Centos.
+iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
+docker run -itd --name pptpd --network host --env user="webxdata" --env password="webxdata" --restart unless-stopped --privileged domorelivelonger/pptpd-docker-alpine
 ```
-or with Docker build
-```
-git clone https://github.com/domorelivelonger/pptpd-docker-alpine.git
-cd pptpd-docker-alpine
-docker build -t pptpd1 .
-docker run --privileged --net=host --sysctl net.ipv4.ip_forward=1 --name pptpd1 -d --restart=always   --publish 1723:1723   \
---volume ./chap-secrets:/etc/ppp/chap-secrets   \
-pptpd1:latest
-```
-Note: Before starting container in --net=host mode, please read how networking in host mode works in Docker: https://docs.docker.com/reference/run/#mode-host
--
-When accessing the vpn, pptp user will be ```x```, and password will be ```x```
-You can change it in file "chap-secrets", after restart container.
 
 License
 ----
